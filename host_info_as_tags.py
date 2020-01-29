@@ -9,7 +9,7 @@ options = {
 initialize(**options)
 
 #api call to get all host level information
-hosts_information = api.Hosts.search()
+hosts_information = api.Hosts.search(count=1000)
 
 #creates list of hosts to iterate over from api call
 host_list = hosts_information.get('host_list')
