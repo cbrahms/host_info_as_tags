@@ -1,6 +1,6 @@
 # host_info_as_tags
 
-This script fetches host metadata that is natively collected from the agent ([example](https://github.com/DataDog/datadog-agent/tree/1c76b8381a195a0b0f629011a6225e936fe1d37a/pkg/metadata/host)), and applies the metadata as tags on the hosts
+This script fetches host metadata from Datadog that is natively collected from the agent ([example](https://github.com/DataDog/datadog-agent/tree/1c76b8381a195a0b0f629011a6225e936fe1d37a/pkg/metadata/host)), and applies the metadata as tags on the hosts
 
 Currently it will update the following tags:
 - platform
