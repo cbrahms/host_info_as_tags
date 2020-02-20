@@ -14,7 +14,7 @@ total_hosts = api.Hosts.totals().get('total_active')
 n = 0
 while n < total_hosts: 
 
-	#api call to get all host level information
+	#api call to get all host level information https://docs.datadoghq.com/api/?lang=python#search-hosts
 	hosts_information = api.Hosts.search(start=n, count=1000)
 	
 	#creates list of hosts to iterate over from api call
@@ -54,8 +54,9 @@ while n < total_hosts:
 			#fbsd
 			platform_version = str(hosti.get('meta').get('fbsdV')[0]).replace(" ","_")
 
-		#update host tags api call
-		api.Tag.update(host_name, tags=[str('platform:'+platform), 'blah:blah', str('os:'+os), str('os_detail:'+os_detail), str('kernel_release:'+kernel_release), str('kernel_name:'+kernel_name), str('platform_version:'+platform_version)])
+		#update host tags api call https://docs.datadoghq.com/api/?lang=python#update-host-tags
+		# NOTE: this will replace any exisiting "User" tags. To instead add these as additional tags, use api.Tag.create() https://docs.datadoghq.com/api/?lang=python#add-tags-to-a-host
+		api.Tag.update(host_name, tags=[str('platform:'+platform), str('os:'+os), str('os_detail:'+os_detail), str('kernel_release:'+kernel_release), str('kernel_name:'+kernel_name), str('platform_version:'+platform_version)])
 
 	n += 1000
 
