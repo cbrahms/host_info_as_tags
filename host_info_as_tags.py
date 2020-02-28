@@ -33,6 +33,8 @@ while n < total_hosts:
 		
 		#found in meta.gohai.platform.os, scrub out special chars
 		os_detail = re.sub("[^A-Za-z0-9]+", "", json.loads(hosti.get('meta').get('gohai')).get('platform').get('os'))
+		
+		ipaddress = json.loads(hosti.get('meta').get('gohai')).get('network').get('ipaddress')
 
 		#found in meta.gohai.platform.os.kernel_release
 		kernel_release = json.loads(hosti.get('meta').get('gohai')).get('platform').get('kernel_release')
@@ -56,7 +58,7 @@ while n < total_hosts:
 
 		#update host tags api call https://docs.datadoghq.com/api/?lang=python#update-host-tags
 		# NOTE: this will replace any exisiting "User" tags. To instead add these as additional tags, use api.Tag.create() https://docs.datadoghq.com/api/?lang=python#add-tags-to-a-host
-		api.Tag.update(host_name, tags=[str('platform:'+platform), str('os:'+os), str('os_detail:'+os_detail), str('kernel_release:'+kernel_release), str('kernel_name:'+kernel_name), str('platform_version:'+platform_version)])
+		api.Tag.create(host_name, tags=[str('ipaddress:'+ipaddress), str('platform:'+platform), str('os:'+os), str('os_detail:'+os_detail), str('kernel_release:'+kernel_release), str('kernel_name:'+kernel_name), str('platform_version:'+platform_version)])
 
 	n += 1000
 
